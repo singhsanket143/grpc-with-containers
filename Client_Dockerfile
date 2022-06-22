@@ -8,5 +8,7 @@ RUN python -m pip install --upgrade pip
 RUN python -m pip install -r requirements.txt
 RUN python3 -m grpc_tools.protoc -I . --python_out=. --grpc_python_out=. todo.proto
 
-EXPOSE 8080
-ENTRYPOINT [ "python3", "client.py" ]
+EXPOSE 5000
+ENV FLASK_APP=client.py
+ENV FLASK_ENV=development
+ENTRYPOINT [ "flask", "run", "--host=0.0.0.0"]

@@ -1,1 +1,3 @@
 grpcio-tools
+flask ~= 1.1
+markupsafe ~= 2.0.1

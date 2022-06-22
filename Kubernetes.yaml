@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: grpc_client
+    name: grpcclient
     labels:
-        app: grpc_client
+        app: grpcclient
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: grpc_client
+            app: grpcclient
     template:
         metadata:
             labels:
-                app: grpc_client
+                app: grpcclient
         spec:
             containers:
-                - name: grpc_client
-                  image: grpc_client
+                - name: grpcclient
+                  image: singhsanket1103/grpc_client
                   env:
                       - name: HOST
                         value: grpc_server
@@ -25,30 +25,30 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: grpc_server
+    name: grpcserver
     labels:
-        app: grpc_server
+        app: grpcserver
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: grpc_server
+            app: grpcserver
     template:
         metadata:
             labels:
-                app: grpc_server
+                app: grpcserver
         spec:
             containers:
-                - name: recommendations
-                  image: grpc_server
+                - name: grpcserver
+                  image: singhsanket1103/grpc_server
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: grpc_server
+    name: grpcserver
 spec:
     selector:
-        app: grpc_server
+        app: grpcserver
     ports:
         - protocol: TCP
           port: 8080
@@ -57,11 +57,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: grpc_client
+    name: grpcclient
 spec:
     type: LoadBalancer
     selector:
-        app: grpc_client
+        app: grpcclient
     ports:
         - protocol: TCP
           port: 5000
